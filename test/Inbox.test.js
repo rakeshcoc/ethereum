@@ -55,4 +55,12 @@ describe('Inbox',function()
 		{
 			assert.ok(inbox.options.address);
 		});
+	it('update contract',async()=>{
+		await inbox.methods.setMessage('bye').send({from: account[0]});
+		const message = inbox.methods.message().call();
+	});
+	it('has a default message',async()=>{
+		const message = await inbox.methods.message().call();
+		assert.equal(message,'Hi Hello!');
+	});
 });
